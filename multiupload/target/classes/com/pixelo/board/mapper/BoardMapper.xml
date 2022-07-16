@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 쓰려면 도큐멘트타입 넣어줘야함 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- boardMapper 에 매핑함  -->
+<mapper namespace="com.pixelo.board.mapper.BoardMapper">
+
+<!--  리스트  서비스에서 넘어오는 데이터중 변수를 찾는방법 #{} 바로 변수명으로 넣어버림-->
+<select id="list" resultType="com.pixelo.board.vo.BoardVO">
+	select no, title, writer, writeDate, hit
+	from(
+		select rownum rnum, no, title, writer, writeDate, hit
+		from(
+			select no, title, writer, writeDate, hit
+			from board
+			order by no desc
+		)
+	)where rnum between #{startRow} and #{endRow}
+	
+</select>
+	
+	<!-- 전체 데이터 개수 가져오기 -->
+	<select id="getTotalRow" resultType="java.lang.Long">
+		select count(*) from board
+	</select>
+	
+	<!-- 조회수 증가 update 가져오는게 없어서 resultType 안쓴다-->
+	<update id="increase">
+	update board set hit = hit+1 where no = #{no}
+	</update>
+	
+	<!-- 게시판 글보기 -->
+	<select id="view" resultType="com.pixelo.board.vo.BoardVO">
+	select no, title, content, writer, writeDate, hit
+	from board where no = #{no}
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="write">
+	insert into board(no, title, content, writer)
+	values (board_seq.nextval, #{title}, #{content}, #{writer})
+	
+	</insert>
+	
+	<!-- 글 수정 -->
+	<update id="update">
+	update board set title = #{title}, content = #{content}, writer = #{writer}
+	where no = #{no}
+
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="delete">
+	delete from board 
+	where no = #{no}
+	</delete>
+	
+	<!-- 가장 큰 번호 가져오기 -->
+	<select id="maxNo" resultType="long">
+	select max(no) from board where writer = #{writer}
+	</select>
+	
+</mapper>
