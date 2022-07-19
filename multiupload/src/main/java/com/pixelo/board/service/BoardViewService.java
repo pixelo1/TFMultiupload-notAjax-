@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.pixelo.board.mapper.BoardMapper;
+import com.pixelo.fileupload.mapper.BoardFileUploadMapper;
 import com.webjjang.util.PageObject;
 
 
@@ -18,6 +19,7 @@ public class BoardViewService implements com.pixelo.myapp.Service {
 
 	//root-context 에mybatis-spring:scan 으로 지정해놔서 생성된다
 	private BoardMapper mapper;
+
 	
 	//mvc 가 아니라 인젝트로 함 / DB값 가져오기
 	@Inject 
@@ -40,6 +42,8 @@ public class BoardViewService implements com.pixelo.myapp.Service {
 		}
 		
 		log.info("글번호 :" +no + "inc :" + inc);
+		
+		
 		
 		return mapper.view(no);
 	}

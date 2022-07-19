@@ -12,4 +12,8 @@
 	</insert>
 	
 
+	<select id="getFileName" resultType="com.pixelo.board.vo.FileUploadVO">
+		select orgFileName, fileName, fileSize, realSavePath from board_fileUpload where boardNo = #{no} 
+	
+	</select>
 </mapper>

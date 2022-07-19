@@ -30,4 +30,6 @@ public interface BoardMapper {
 	
 	//가장 큰 글번호 받아오기
 	public long maxNo(String writer) throws Exception;
+	
+
 }

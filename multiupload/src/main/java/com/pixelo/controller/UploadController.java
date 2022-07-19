@@ -45,8 +45,12 @@ public class UploadController {
 		log.info(request);
 		//업로드 경로에 날짜를 추가시킴
 		File uploadPath = new File(path, getFolder());
-		log.info("upload path : "+ uploadPath);
+		log.info("upload path : "+ uploadPath.getPath());
 
+		// 기본 슬레시로 db에 저장 upload에서 파일 꺼내올수있게
+		String dbUploadPath = (uploadPath.toString()).replace(File.separator, "/")+"/";
+		
+		
 		
 		//실제적으로 저장되느 절대 위치 찾기
 //		String realPath = request.getServletContext().getRealPath(path);
@@ -57,6 +61,8 @@ public class UploadController {
 		File folder = new File(realPath);
 		boolean isExist = folder.exists();
 		if(!isExist) folder.mkdirs();
+		
+		
 		
 		for (MultipartFile mf : uploadFile) {
 			log.info("-------------------------------------------");
@@ -85,13 +91,15 @@ public class UploadController {
 			if(list ==null) list = new ArrayList<FileUploadVO>();
 			FileUploadVO vo = new FileUploadVO();
 			vo.setOrgFileName(orgFileName);
-			vo.setFileName(uuidOrgFileName);
+			vo.setFileName(dbUploadPath+uuidOrgFileName);
 			vo.setFileSize(mf.getSize());
 			vo.setRealSavePath(saveFile.toString());
 			vo.setBoardNo(no);
 			
 			
 			list.add(vo);
+			log.info("vo 에 저장된 fileName : "+ vo.getFileName());
+			
 		}
 			
 		// jsp에 첨부파일을 보낸다

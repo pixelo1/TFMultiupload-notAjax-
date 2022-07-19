@@ -21,6 +21,8 @@ import com.pixelo.fileupload.service.BoardFileUploadService;
 import com.pixelo.myapp.Service;
 import com.webjjang.util.PageObject;
 
+import lombok.Setter;
+
 //자동으로 new 하게 하려고 / servlet-context.xml 에 myapp만 되어있는상태 수정해준다
 // 자동생성 - @Cotroller, @Service, @Repository, @Component, @RestController(Ajax쓸때), @Advice(예외처리할때)
 // 단, servlet-context.xml 에서 component-scan 안에 base-package 속성 안에  작성되어있어야한다
@@ -39,6 +41,7 @@ public class BoardController {
 	private Service boardDeleteService;
 	
 	private Service boardFileUploadService;
+	private Service boardFileNameService;
 	//boardListService를 자동으로 연결시켜 쓴다 - 
 	//DI 적용 Spring 단 - @Autowired, java 단 - @Inject 
 	//jsp 할때는 디스패쳐에서 직접 넣어줬어야함
@@ -66,6 +69,10 @@ public class BoardController {
 	public void setBoardFileUploadService(Service boardFileUploadService) {
 		this.boardFileUploadService = boardFileUploadService;
 	}
+	@Autowired
+	public void setBoardFileNameService(Service boardFileNameService) {
+		this.boardFileNameService = boardFileNameService;
+	}
 	// 게시판 리스트 return 으로 String 넘겨준다 (), model 로 request에 저장시킨다
 	@GetMapping("/list.do")
 	//
@@ -89,6 +96,11 @@ public class BoardController {
 		log.info("게시판 글 보기 no: " + no +"inc : "+ inc);
 
 		model.addAttribute("vo", boardViewService.Service(new Object[] {no, inc}));
+		
+		List<FileUploadVO> fileNameList = (List<FileUploadVO>) boardFileNameService.Service(no);
+		log.info("fileNameList 반환값 log : " + fileNameList.toString());
+		model.addAttribute("fileNameList", fileNameList);
+
 		return "board/view";
 	}
 	
