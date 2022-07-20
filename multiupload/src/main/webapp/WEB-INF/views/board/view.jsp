@@ -28,7 +28,9 @@
 			<td>
 				<c:forEach items="${fileNameList }" var="fileVO">
 					<img alt="" src="${fileVO.fileName }" width="100px">
-					<p>${fileVO.orgFileName } [${fileVO.fileSize}]</p>
+					<p>
+					<a href="${fileVO.fileName }" download="${fileVO.orgFileName }">다운</a>
+					${fileVO.orgFileName } [${fileVO.fileSize}]</p>
 				</c:forEach>
 			</td>
 		</tr>
