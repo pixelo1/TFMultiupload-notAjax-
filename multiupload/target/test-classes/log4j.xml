@@ -32,6 +32,18 @@
 		<level value="info" />
 	</logger>
 
+	<!-- jdbc 로그  경고이상 나와야 찍는다
+	audit 권한, reesultset, connection-->
+	<logger name="jdbc.audit">
+		<level value="warn"/>
+	</logger>
+	<logger name="jdbc.resultset">
+		<level value="warn"/>
+	</logger>
+	<logger name="jdbc.connection">
+		<level value="warn"/>
+	</logger>
+
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />
