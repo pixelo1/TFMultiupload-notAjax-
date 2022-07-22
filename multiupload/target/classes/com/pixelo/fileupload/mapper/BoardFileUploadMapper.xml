@@ -16,4 +16,8 @@
 		select orgFileName, fileName, fileSize, realSavePath from board_fileUpload where boardNo = #{no} 
 	
 	</select>
+	
+	<delete id="deleteFile">
+		delete board_fileUpload where boardNo = #{boardNo}
+	</delete>
 </mapper>

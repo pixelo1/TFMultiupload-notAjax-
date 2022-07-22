@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pixelo.board.controller.BoardController;
 import com.pixelo.board.service.BoardListService;
 
 import lombok.Setter;
@@ -30,4 +31,5 @@ public class JunitTest {
 
 
 	}
+	
 }

@@ -15,4 +15,7 @@ public interface BoardFileUploadMapper {
 	
 	//fileName 가져오기
 	public List<FileUploadVO> getFileName(long no) throws Exception;
+	
+	//해당 글번호 파일업로드 정보 삭제
+	public int deleteFile(long boardNo) throws Exception;
 }

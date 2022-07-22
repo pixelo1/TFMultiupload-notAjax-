@@ -140,4 +140,18 @@ public class UploadController {
 		return false;
 	}
 	
+	public void delete(List<FileUploadVO> fileNameList) throws Exception {
+		
+		//파일정보 foreach 로 돌려 삭제 - realpath.delete 쓰면 될듯?
+		for (FileUploadVO fileVO : fileNameList) {
+			if(fileVO.getRealSavePath() != null && !fileVO.equals("")) {
+				new File(fileVO.getRealSavePath()).delete();
+//					delFile = new File(request.getServletContext().getRealPath(del));
+			}
+		
+		}
+		return;
+		
+	}
+	
 }

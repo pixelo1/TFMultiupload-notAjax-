@@ -30,12 +30,11 @@
 
 		<!-- servlet 안에다 넣어줘야함 -->
 		<multipart-config>
-			<location>c:\\upload\\temp</location>
-			<max-file-size>20971520</max-file-size><!-- 1024*1024*20 : 파일 한개의 용량 제한 
-				: 20MB -->
+		<!-- 임시파일 위치 -->
+			<location>c:\\upload\\tmp</location>
+			<max-file-size>20971520</max-file-size><!-- 1024*1024*20 : 파일 한개의 용량 제한 : 20MB -->
 			<max-request-size>41943040</max-request-size> <!-- 전체 파일 사이즈 -->
-			<file-size-threshold>20971520</file-size-threshold><!-- 20M 이하면 메모리 / 
-				초과하면 파일 -->
+			<file-size-threshold>20971520</file-size-threshold><!-- 20M 이하면 메모리 / 초과하면 파일 -->
 		</multipart-config>
 
 	</servlet>
